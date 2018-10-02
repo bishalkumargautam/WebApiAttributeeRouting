@@ -8,8 +8,10 @@ using WebApiAttributeeRouting.Models;
 
 namespace WebApiAttributeeRouting.Controllers
 {
+    [RoutePrefix("api/students")] // adding routeprefix to controller
     public class StudentsController : ApiController
     {
+
         static List<Student> students = new List<Student>()
         {
             new Student(){Id=1,Name="Anthony"},
@@ -19,17 +21,31 @@ namespace WebApiAttributeeRouting.Controllers
 
         };
 
+       [Route("~/api/teachers")] //overriding route prefix 
+        public IEnumerable<Teacher> GetTeachers()
+        {
+            List<Teacher> teachers = new List<Teacher>()
+            {
+                new Teacher(){Id=1,Name="Hari"},
+                new Teacher(){Id=2,Name="Ram"},
+                new Teacher(){Id=3,Name="Shyam"},
+            };
+            return teachers;
+        }
+
+        [Route("")]
         public IEnumerable<Student> Get()
         {
             return students.ToList();
         }
 
+        [Route("{id}")]
         public Student Get(int id)
         {
             return students.FirstOrDefault(e => e.Id == id);
         }
-        
-        [Route("api/students/{id}/courses")]//User of [Route] to define routes is called attribute based routing.
+
+        [Route("{id}/courses")]//User of [Route] to define routes is called attribute based routing.
         //in attribute based routing we define routes. If this route had not been defined, the controller
         //gets confused when http://localhost:57392/api/students/1 is sent, because both the get request for student and get request for 
         //course starts with keyword get, so it gets confused.
