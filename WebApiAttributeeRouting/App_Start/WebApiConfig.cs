@@ -7,7 +7,7 @@ namespace WebApiAttributeeRouting
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static void Register(HttpConfiguration config) 
         {
             // Web API configuration and services
 
