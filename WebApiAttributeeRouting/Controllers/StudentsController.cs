@@ -39,10 +39,17 @@ namespace WebApiAttributeeRouting.Controllers
             return students.ToList();
         }
 
-        [Route("{id}")]
+        [Route("{id:int}")]//constraints to add what type of id is passed. If this constraint is not defined then the controller will be
+        //confused between this method and Get(string name) method
         public Student Get(int id)
         {
             return students.FirstOrDefault(e => e.Id == id);
+        }
+
+        [Route("{name:alpha}")]//alpha denotes upper or lower case alphabetic characters. Others type of constraints are double , booleadn, float etc.
+        public Student Get(string name)
+        {
+            return students.FirstOrDefault(e => e.Name.ToLower() == name.ToLower());
         }
 
         [Route("{id}/courses")]//User of [Route] to define routes is called attribute based routing.
