@@ -38,15 +38,15 @@ namespace WebApiAttributeeRouting.Controllers
                 return Ok(std);
             }
         }
-        
+
         //Post
         [HttpPost]
-       [Route(Name ="AddMaleStudent")]
-        public IHttpActionResult AddStudent( MaleStudent maleStudent)
+        [Route(Name = "AddMaleStudent")]
+        public IHttpActionResult AddStudent(MaleStudent maleStudent)
         {
             maleStudents.Add(maleStudent);
             return Content(HttpStatusCode.Created, "Item created");
-          
+
         }
     }
 }

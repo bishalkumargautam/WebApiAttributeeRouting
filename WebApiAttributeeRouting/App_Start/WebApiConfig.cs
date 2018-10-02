@@ -14,6 +14,17 @@ namespace WebApiAttributeeRouting
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            config.Routes.MapHttpRoute(
+               name: "Version1",
+               routeTemplate: "api/v1/{studentsversion1}/{id}",
+               defaults: new { id = RouteParameter.Optional,controller="StudentVersion1" }
+           );
+
+            config.Routes.MapHttpRoute(
+               name: "Version2",
+               routeTemplate: "api/v2/{studentsversion2}/{id}",
+               defaults: new { id = RouteParameter.Optional,controller="StudentVersion2" }
+           );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
