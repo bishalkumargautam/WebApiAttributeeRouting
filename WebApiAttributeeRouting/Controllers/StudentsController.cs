@@ -39,7 +39,8 @@ namespace WebApiAttributeeRouting.Controllers
             return students.ToList();
         }
 
-        [Route("{id:int}")]//constraints to add what type of id is passed. If this constraint is not defined then the controller will be
+        [Route("{id:int:min(1):max(100)}")] // constraints with paramaters
+        //constraints to add what type of id is passed. If this constraint is not defined then the controller will be
         //confused between this method and Get(string name) method
         public Student Get(int id)
         {
@@ -70,6 +71,17 @@ namespace WebApiAttributeeRouting.Controllers
             {
                 return new List<string>() { "C#", "Angular", "Bootstrap", "ASP.NET", "SQL" };
             }
+        }
+
+
+        //Post
+        [Route("~/api/students",Name ="GetStudentsById")]
+        public HttpResponseMessage Post(Student student)
+        {
+            students.Add(student);
+            var response= Request.CreateResponse(HttpStatusCode.Created);
+            response.Headers.Location = new Uri(Url.Link("GetStudentsById",new { id=student.Id}));//adding Uri to response that will get the link for this created student object.
+            return response;
         }
 
     }
